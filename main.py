@@ -1,4 +1,10 @@
+import string
 import pygame
+from pathlib import Path
+
+from card import Card
+
+
 pygame.init()
 
 # Set up the drawing window
@@ -7,13 +13,21 @@ screen = pygame.display.set_mode([500, 500])
 # Run until the user asks to quit
 
 running = True
+current_dir = str(Path().absolute())
+card_path = r'\img\card_back.jpg'
 
-back_card_img = pygame.image.load(r'C:\Users\br0049087103\Documents\Code\Python\simpleChess\img\card_back.jpg')
-size_x, size_y = back_card_img.get_size()
-scale_factor = 4
-back_card_img = pygame.transform.scale(back_card_img, (int(size_x / scale_factor), int(size_y / scale_factor)))
+print("current path is ", current_dir)
+# E:\LAPTOP_BACKUP\Duat\Nirvana\NeoSoft\Python\pyCard\img
+
+newCard = Card(current_dir + card_path, 4, (0, 0))
+
+myCards = []
 
 card_pad_left = 25
+
+
+for a in range(5):
+        myCards[a] = Card(current_dir + card_path, 4, (100 * a, 0))
 
 
 while running:
@@ -30,7 +44,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
-            clicked_sprites = [s for s in sprites if s.rect.collidepoint(pos)]
+            # clicked_sprites = [s for s in sprites if s.rect.collidepoint(pos)]
 
 
     # Fill the background with white
@@ -41,8 +55,8 @@ while running:
     pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
 
     for a in range(5):
-        screen.blit(back_card_img, (card_pad_left + 100 * a, 0))
-        screen.blit(back_card_img, (card_pad_left + 100 * a, 400))
+        screen.blit(myCards[a].card_img, (card_pad_left, 0) + myCards[a].position)
+        screen.blit(newCard.card_img, (card_pad_left + 100 * a, 400))
 
     # Flip the display
     pygame.display.flip()
