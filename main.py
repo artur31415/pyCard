@@ -44,7 +44,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
-            clicked_cards = [s for s in myCards if s.rect.collidepoint(pos)]
+            clicked_cards = [s for s in myCards if s.card_img.rect.collidepoint(pos)]
             if clicked_cards.count > 0:
                 for x in range(clicked_cards.count):
                     print("Card -> ", clicked_cards[x].json_data, " clicked")
