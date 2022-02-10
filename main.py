@@ -19,7 +19,7 @@ card_path = r'\img\card_back.jpg'
 print("current path is ", current_dir)
 # E:\LAPTOP_BACKUP\Duat\Nirvana\NeoSoft\Python\pyCard\img
 
-newCard = Card(current_dir + card_path, 4, (0, 0))
+newCard = Card(current_dir + card_path, "{name:debug1}", 4, (0, 0))
 
 myCards = []
 
@@ -27,7 +27,7 @@ card_pad_left = 25
 
 
 for a in range(5):
-        myCards[a] = Card(current_dir + card_path, 4, (100 * a, 0))
+    myCards.append(Card(current_dir + card_path, "{name:debug" + str(a) + "}", 4, (100 * a, 0)))
 
 
 while running:
@@ -44,7 +44,9 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
-            # clicked_sprites = [s for s in sprites if s.rect.collidepoint(pos)]
+            clicked_cards = [s for s in myCards if s.rect.collidepoint(pos)]
+            if clicked_cards.count > 0:
+
 
 
     # Fill the background with white
@@ -55,7 +57,7 @@ while running:
     pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
 
     for a in range(5):
-        screen.blit(myCards[a].card_img, (card_pad_left, 0) + myCards[a].position)
+        screen.blit(myCards[a].card_img, (card_pad_left + myCards[a].position[0], myCards[a].position[1]))
         screen.blit(newCard.card_img, (card_pad_left + 100 * a, 400))
 
     # Flip the display
