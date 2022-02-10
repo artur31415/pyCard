@@ -46,7 +46,8 @@ while running:
             # get a list of all sprites that are under the mouse cursor
             clicked_cards = [s for s in myCards if s.rect.collidepoint(pos)]
             if clicked_cards.count > 0:
-
+                for x in range(clicked_cards.count):
+                    print("Card -> ", clicked_cards[x].json_data, " clicked")
 
 
     # Fill the background with white
