@@ -1,3 +1,4 @@
+import json
 import string
 import pygame
 from pathlib import Path
@@ -25,10 +26,19 @@ myCards = []
 
 card_pad_left = 25
 
+# Opening JSON file
+f = open(current_dir + r'\data\cards.json')
+ 
+# returns JSON object as
+# a dictionary
+data = json.load(f)
+
 
 for a in range(5):
     myCards.append(Card(current_dir + card_path, "{name:debug" + str(a) + "}", 4, (100 * a, 0)))
 
+
+f.close()
 
 while running:
     for event in pygame.event.get():
@@ -44,7 +54,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
-            clicked_cards = [s for s in myCards if s.card_img.rect.collidepoint(pos)]
+            clicked_cards = [s for s in myCards if s.card_img.get_rect().collidepoint(pos)]
             if clicked_cards.count > 0:
                 for x in range(clicked_cards.count):
                     print("Card -> ", clicked_cards[x].json_data, " clicked")

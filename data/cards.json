@@ -1,0 +1,35 @@
+{
+    "cards": [
+        {
+            "name": "Monster1",
+            "atk": 1000,
+            "def": 500
+        },
+        {
+            "name": "Monster2",
+            "atk": 1200,
+            "def": 500
+        },
+        {
+            "name": "Monster3",
+            "atk": 300,
+            "def": 500
+        },
+        {
+            "name": "Monster4",
+            "atk": 800,
+            "def": 500
+        },
+        {
+            "name": "Monster5",
+            "atk": 50,
+            "def": 500
+        },
+        {
+            "name": "Monster6",
+            "atk": 100,
+            "def": 500
+        }
+
+    ]
+}
