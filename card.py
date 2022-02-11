@@ -8,3 +8,6 @@ class Card:
 
         self.position = position
         self.json_data = json_data
+
+        self.is_attack_mode = True
+        self.is_face_up = True

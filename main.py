@@ -31,14 +31,16 @@ f = open(current_dir + r'\data\cards.json')
  
 # returns JSON object as
 # a dictionary
-data = json.load(f)
+card_data = json.load(f)
 
 
 for a in range(5):
-    myCards.append(Card(current_dir + card_path, "{name:debug" + str(a) + "}", 4, (100 * a, 0)))
+    myCards.append(Card(current_dir + card_path, card_data['cards'][a], 4, (100 * a, 0)))
 
 
 f.close()
+
+log_count = 0
 
 while running:
     for event in pygame.event.get():
@@ -55,9 +57,15 @@ while running:
             pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
             clicked_cards = [s for s in myCards if s.card_img.get_rect().collidepoint(pos)]
-            if clicked_cards.count > 0:
-                for x in range(clicked_cards.count):
-                    print("Card -> ", clicked_cards[x].json_data, " clicked")
+            if len(clicked_cards) > 0:
+                for x in range(len(clicked_cards)):
+                    print(log_count, "# Card -> ", clicked_cards[x].json_data['name'], " clicked")
+                    log_count += 1
+
+
+        if myCards[0].card_img.get_rect().collidepoint(pygame.mouse.get_pos()):
+            print(log_count, "# mouse is over ", myCards[0].json_data['name'])
+            log_count += 1
 
 
     # Fill the background with white
