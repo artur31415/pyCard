@@ -74,7 +74,8 @@ while running:
                     log_count += 1
 
 
-        if myCards[0].card_img.get_rect().collidepoint(pygame.mouse.get_pos()):
+        mouse_pos = pygame.mouse.get_pos()
+        if myCards[0].card_img.get_rect().collidepoint((mouse_pos[0] - myCards[0].position[0], mouse_pos[1] - myCards[0].position[1])):
             print(log_count, "# mouse is over ", myCards[0].json_data['name'], "; card pos = ", myCards[0].position, "; mouse pos = ", pygame.mouse.get_pos())
             log_count += 1
 
