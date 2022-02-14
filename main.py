@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import json
 import string
 import pygame
@@ -35,12 +36,19 @@ card_data = json.load(f)
 
 
 for a in range(5):
-    myCards.append(Card(current_dir + card_path, card_data['cards'][a], 4, (100 * a, 0)))
+    myCards.append(Card(current_dir + card_path, card_data['cards'][a], 4, (100 * a, 20)))
 
 
 f.close()
 
 log_count = 0
+
+pygame.font.init()
+myfont = pygame.font.SysFont('Comic Sans MS', 10)
+
+selected_card = None
+
+print("rect > ", myCards[0].card_img.get_rect())
 
 while running:
     for event in pygame.event.get():
@@ -53,18 +61,21 @@ while running:
             elif event.key == pygame.K_d:
                 print("pressed D")
 
+        #selected_card = None
+
         if event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
+            mouse_pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
-            clicked_cards = [s for s in myCards if s.card_img.get_rect().collidepoint(pos)]
+            clicked_cards = [s for s in myCards if s.card_img.get_rect().collidepoint(mouse_pos)]
             if len(clicked_cards) > 0:
                 for x in range(len(clicked_cards)):
+                    selected_card = clicked_cards[x]
                     print(log_count, "# Card -> ", clicked_cards[x].json_data['name'], " clicked")
                     log_count += 1
 
 
         if myCards[0].card_img.get_rect().collidepoint(pygame.mouse.get_pos()):
-            print(log_count, "# mouse is over ", myCards[0].json_data['name'])
+            print(log_count, "# mouse is over ", myCards[0].json_data['name'], "; card pos = ", myCards[0].position, "; mouse pos = ", pygame.mouse.get_pos())
             log_count += 1
 
 
@@ -79,6 +90,10 @@ while running:
         screen.blit(myCards[a].card_img, (card_pad_left + myCards[a].position[0], myCards[a].position[1]))
         screen.blit(newCard.card_img, (card_pad_left + 100 * a, 400))
 
+
+    if selected_card != None:
+        textsurface = myfont.render(selected_card.json_data['name'], False, (0, 0, 0))
+        screen.blit(textsurface, (selected_card.position[0], selected_card.position[1] + 30))
     # Flip the display
     pygame.display.flip()
 
