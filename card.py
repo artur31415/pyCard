@@ -9,5 +9,8 @@ class Card:
         self.position = position
         self.json_data = json_data
 
+        self.is_on_field = False
+        self.is_selected = False
+
         self.is_attack_mode = True
         self.is_face_up = True

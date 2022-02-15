@@ -50,10 +50,16 @@ selected_card = None
 
 print("rect > ", myCards[0].card_img.get_rect())
 
+######################################################################
+######################################################################
+######################################################################
+
 def PointMinus(pointA, pointB):
     return (pointA[0] - pointB[0], pointA[1] - pointB[1])
 
-######################################################################3
+######################################################################
+######################################################################
+######################################################################
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -77,6 +83,9 @@ while running:
                     print(log_count, "# Clicked Card -> ", clicked_cards[x].json_data['name'], " clicked")
                     log_count += 1
 
+                    #TODO: IF CARD IS IN HAND, SET SCHEMA TO PLACE CARD IN FIELD
+                    #TODO: IF CARD IS ON FIELD, ATK/DEF STANCE
+
 
         for myCard in myCards:
             mouse_pos = pygame.mouse.get_pos()
@@ -96,7 +105,7 @@ while running:
     
 
     if selected_card != None:
-        textsurface = myfont.render(selected_card.json_data['name'] + r"\nAtk " + str(selected_card.json_data['atk']) + r"\nDef " + str(selected_card.json_data['def']), False, (0, 0, 0))
+        textsurface = myfont.render(selected_card.json_data['name'] + r": (" + str(selected_card.json_data['atk']) + r", " + str(selected_card.json_data['def']) + ")", False, (0, 0, 0))
         screen.blit(textsurface, (selected_card.position[0], selected_card.position[1] + 70))
     
     #pygame.draw.circle(screen, (0, 0, 255), myCards[1].position, 10)

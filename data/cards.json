@@ -3,37 +3,79 @@
         {
             "name": "Monster0",
             "atk": 1000,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster1",
             "atk": 1200,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster2",
             "atk": 300,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster3",
             "atk": 800,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster4",
             "atk": 50,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster5",
             "atk": 100,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         },
         {
             "name": "Monster6",
             "atk": 1100,
-            "def": 500
+            "def": 500,
+            "element": "Water",
+            "type": "Insect",
+            "rarity": 50,
+            "description": "",
+            "effect": "",
+            "file_name": "monster_0"
         }
 
     ]
