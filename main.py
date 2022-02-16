@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 
-from card import Card
+from card import *
 from field_slot import *
 
 pygame.init()
@@ -31,6 +31,7 @@ newCard = Card(current_dir + card_path, "{name:debug1}", 4, (0, 0))
 myCards = []
 
 myField = []
+enemyField = []
 
 card_pad_left = 25
 
@@ -41,11 +42,14 @@ f = open(current_dir + r'\data\cards.json')
 # a dictionary
 card_data = json.load(f)
 
+field_base_height = 130
+fields_delta_height = 10
 
 for a in range(5):
     myCards.append(Card(current_dir + card_path, card_data['cards'][a], 4, (100 * a + card_pad_left, 20)))
 
-    myField.append(FieldSlot((50, 200), None, ))
+    enemyField.append(FieldSlot((50 + 72 * a, field_base_height), None, CardClass.Magic, 70, 110))   
+    myField.append(FieldSlot((50 + 72 * a, field_base_height + fields_delta_height + 110), None, CardClass.Magic, 70, 110))
 
 
 f.close()
@@ -119,12 +123,18 @@ while running:
     
     #pygame.draw.circle(screen, (0, 0, 255), myCards[1].position, 10)
 
-    (_, _, rect_w, rect_h) = myCards[0].card_img.get_rect()
-    row_counts = 3
-    for k in range(row_counts):
-        pygame.draw.line(screen, (0, 0, 255), (0, 200 + k * rect_w), (width, 200 + k * rect_w))
-        pygame.draw.line(screen, (0, 0, 255), (200 + k * rect_w, 200), (200 + k * rect_w, 200 + row_counts * rect_w))
+    # (_, _, rect_w, rect_h) = myCards[0].card_img.get_rect()
+    # row_counts = 3
+    # for k in range(row_counts):
+    #     pygame.draw.line(screen, (0, 0, 255), (0, 200 + k * rect_w), (width, 200 + k * rect_w))
+    #     pygame.draw.line(screen, (0, 0, 255), (200 + k * rect_w, 200), (200 + k * rect_w, 200 + row_counts * rect_w))
     
+    for myFieldSlot in myField:
+        pygame.draw.rect(screen, (0, 0, 255), myFieldSlot.get_rect(), 1)
+
+    for enemyFieldSlot in enemyField:
+        pygame.draw.rect(screen, (0, 255, 255), enemyFieldSlot.get_rect(), 1)
+
     # Flip the display
     pygame.display.flip()
 
