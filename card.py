@@ -1,4 +1,9 @@
+from enum import Enum
 import pygame
+
+CardType = Enum("Insect", "Dragon")
+CardClass = Enum("Monster", "Magic")
+CardElement = Enum("Dark", "Light")
 
 class Card:
     def __init__(self, img_path, json_data, img_scale_factor, position) -> None:

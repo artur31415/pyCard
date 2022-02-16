@@ -4,14 +4,19 @@ import string
 import pygame
 from pathlib import Path
 
-from card import Card
 
+
+from card import Card
+from field_slot import *
 
 pygame.init()
 
 # Set up the drawing window
 
-screen = pygame.display.set_mode([500, 500])
+width = 500
+height = 500
+
+screen = pygame.display.set_mode([width, height])
 # Run until the user asks to quit
 
 running = True
@@ -25,6 +30,8 @@ newCard = Card(current_dir + card_path, "{name:debug1}", 4, (0, 0))
 
 myCards = []
 
+myField = []
+
 card_pad_left = 25
 
 # Opening JSON file
@@ -37,6 +44,8 @@ card_data = json.load(f)
 
 for a in range(5):
     myCards.append(Card(current_dir + card_path, card_data['cards'][a], 4, (100 * a + card_pad_left, 20)))
+
+    myField.append(FieldSlot((50, 200), None, ))
 
 
 f.close()
@@ -109,6 +118,12 @@ while running:
         screen.blit(textsurface, (selected_card.position[0], selected_card.position[1] + 70))
     
     #pygame.draw.circle(screen, (0, 0, 255), myCards[1].position, 10)
+
+    (_, _, rect_w, rect_h) = myCards[0].card_img.get_rect()
+    row_counts = 3
+    for k in range(row_counts):
+        pygame.draw.line(screen, (0, 0, 255), (0, 200 + k * rect_w), (width, 200 + k * rect_w))
+        pygame.draw.line(screen, (0, 0, 255), (200 + k * rect_w, 200), (200 + k * rect_w, 200 + row_counts * rect_w))
     
     # Flip the display
     pygame.display.flip()
