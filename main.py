@@ -90,6 +90,11 @@ while running:
             mouse_pos = pygame.mouse.get_pos()
             # get a list of all sprites that are under the mouse cursor
             clicked_cards = [s for s in myCards if s.card_img.get_rect().collidepoint(PointMinus(mouse_pos, s.position))]
+            clicked_my_slots = [s for s in myField if s.get_rect().collidepoint(PointMinus(mouse_pos, s.position))]
+            clicked_enemy_slots = [s for s in enemyField if s.get_rect().collidepoint(PointMinus(mouse_pos, s.position))]
+
+
+            # CHECK FOR CLICKED CARDS
             if len(clicked_cards) > 0:
                 for x in range(len(clicked_cards)):
                     selected_card = clicked_cards[x]
@@ -98,6 +103,17 @@ while running:
 
                     #TODO: IF CARD IS IN HAND, SET SCHEMA TO PLACE CARD IN FIELD
                     #TODO: IF CARD IS ON FIELD, ATK/DEF STANCE
+            # CHECK FOR CLICKED MY SLOTS
+            if len(clicked_my_slots) > 0:
+                for my_slot in clicked_my_slots:
+                    print(log_count, "# Clicked My Slot at -> ", my_slot.position, " clicked")
+                    log_count += 1
+
+            # CHECK FOR CLICKED ENEMY SLOTS
+            if len(clicked_enemy_slots) > 0:
+                for my_slot in clicked_enemy_slots:
+                    print(log_count, "# Clicked Enemy Slot at -> ", my_slot.position, " clicked")
+                    log_count += 1
 
 
         for myCard in myCards:
