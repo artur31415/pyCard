@@ -66,6 +66,16 @@ print("rect > ", myCards[0].card_img.get_rect())
 ######################################################################
 ######################################################################
 ######################################################################
+def GetSelectedCardIndex():
+    for x in range(len(myCards)):
+        if myCards[x].is_selected:
+            return x
+    return -1
+
+def UnselectAllMyCardsExcept(exceptionIndex):
+    for x in range(len(myCards)):
+        if x != exceptionIndex:
+            myCards[x].is_selected = False
 
 def GetCardIndexByName(cardArray, cardName):
     for x in range(len(cardArray)):
@@ -112,11 +122,18 @@ while running:
                     selected_card_index = GetCardIndexByName(myCards, clicked_cards[x].json_data['name'])
                     if selected_card_index != -1:
                         myCards[selected_card_index].is_selected = True
+                        #TODO: UNSELECT ALL OTHERS
+                        UnselectAllMyCardsExcept(selected_card_index)
+
             # CHECK FOR CLICKED MY SLOTS
             if len(clicked_my_slots) > 0:
                 for my_slot in clicked_my_slots:
                     print(log_count, "# Clicked My Slot at -> ", my_slot.position, " clicked")
                     log_count += 1
+                    #TODO: CHECK IF CARD IS SELECTED
+                    selected_card_index = GetSelectedCardIndex()
+                    if selected_card_index != -1:
+                        myCards[selected_card_index].position = my_slot.position
 
             # CHECK FOR CLICKED ENEMY SLOTS
             if len(clicked_enemy_slots) > 0:
@@ -155,10 +172,10 @@ while running:
     #     pygame.draw.line(screen, (0, 0, 255), (200 + k * rect_w, 200), (200 + k * rect_w, 200 + row_counts * rect_w))
     
     for myFieldSlot in myField:
-        pygame.draw.rect(screen, (0, 0, 255), myFieldSlot.get_rect(), 1)
+        pygame.draw.rect(screen, (0, 0, 255), myFieldSlot.get_rect_with_pos(), 1)
 
     for enemyFieldSlot in enemyField:
-        pygame.draw.rect(screen, (0, 255, 255), enemyFieldSlot.get_rect(), 1)
+        pygame.draw.rect(screen, (0, 255, 255), enemyFieldSlot.get_rect_with_pos(), 1)
 
     # Flip the display
     pygame.display.flip()

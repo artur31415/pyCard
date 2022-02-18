@@ -9,5 +9,8 @@ class FieldSlot:
         self.width = width
         self.height = height
 
+    def get_rect_with_pos(self):
+        return pygame.Rect(self.position[0], self.position[1], self.width, self.height)
+
     def get_rect(self):
-        return pygame.Rect(self.position[0], self.position[1], self.width, self.height) # [self.position[0], self.position[1], self.width, self.height]
+        return pygame.Rect(0, 0, self.width, self.height) # [self.position[0], self.position[1], self.width, self.height]
