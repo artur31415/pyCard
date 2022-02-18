@@ -67,6 +67,12 @@ print("rect > ", myCards[0].card_img.get_rect())
 ######################################################################
 ######################################################################
 
+def GetCardIndexByName(cardArray, cardName):
+    for x in range(len(cardArray)):
+        if cardArray[x].json_data['name'] == cardName:
+            return x
+    return -1
+
 def PointMinus(pointA, pointB):
     return (pointA[0] - pointB[0], pointA[1] - pointB[1])
 
@@ -103,6 +109,9 @@ while running:
 
                     #TODO: IF CARD IS IN HAND, SET SCHEMA TO PLACE CARD IN FIELD
                     #TODO: IF CARD IS ON FIELD, ATK/DEF STANCE
+                    selected_card_index = GetCardIndexByName(myCards, clicked_cards[x].json_data['name'])
+                    if selected_card_index != -1:
+                        myCards[selected_card_index].is_selected = True
             # CHECK FOR CLICKED MY SLOTS
             if len(clicked_my_slots) > 0:
                 for my_slot in clicked_my_slots:
